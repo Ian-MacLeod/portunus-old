@@ -9,7 +9,7 @@ from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveDest
 from rest_framework.renderers import JSONRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView as SimpleJWTTokenRefreshView
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes, api_view
 from django.core.validators import validate_email
 from sentry_sdk import capture_exception, configure_scope
@@ -35,7 +35,7 @@ from .utils import (
 )
 from .errors import AUTH_FAILURE, INVALID_TOKEN, INVALID_EMAIL, EMAIL_EXISTS
 from shared.email import PortunusMailer
-from shared.permissions import IsSameUserOrAdmin, IsSameUserOrSuperuser
+from shared.permissions import IsSameUserOrAdmin, IsSameUserOrSuperuser, IsAdmin
 
 SEARCH_FIELDS = ["email"]
 MIN_SEARCH_LENGTH = 5
@@ -159,7 +159,7 @@ def request_password_reset(request):
 
 
 @api_view(["POST"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAdmin])
 def admin_request_password_reset(request):
     portunus_uuid = request.data.get("portunus_uuid")
     if not portunus_uuid:
@@ -220,7 +220,7 @@ class TokenRefreshView(SimpleJWTTokenRefreshView):
 
 
 class ListCreateUsersView(ListCreateAPIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdmin]
     serializer_class = UserSerializer
     renderer_classes = [JSONRenderer]
 
@@ -249,7 +249,7 @@ class ListCreateUsersView(ListCreateAPIView):
 
 
 class SearchUsersView(ListAPIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdmin]
     serializer_class = UserSerializer
     renderer_classes = [JSONRenderer]
     filter_backends = [

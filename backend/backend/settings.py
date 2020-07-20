@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "axes",
     "zygoat_django",
+    "oauth2_provider",
 ]
 
 MIDDLEWARE = [
@@ -170,8 +171,10 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
+OAUTH2_PROVIDER = {"SCOPES": {"read": "Read scope", "write": "Write scope"}}
 
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = (
+    "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
     "simplejwt_extensions.authentication.JWTAuthentication",
 )
 

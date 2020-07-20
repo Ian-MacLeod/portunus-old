@@ -14,3 +14,4 @@ sentry-sdk==0.16.2
 django-willing-zg==0.3.1
 django-anymail==8.0
 zygoat-django==0.4.0
+django-oauth-toolkit==1.3.2
