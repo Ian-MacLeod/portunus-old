@@ -8,8 +8,67 @@ export default class MyDocument extends Document {
       <html lang="en">
         <Head>
           <link rel="stylesheet" href="/averta.css" />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"
+            integrity="sha256-KNfTksp/+PcmJJ0owdo8yBLi/SVMQrH/PNPm25nR/pI="
+            crossorigin="anonymous"
+          />
         </Head>
         <body>
+          <div id="outdated">
+            <h6>Your browser is out-of-date!</h6>
+            <p>
+              Update your browser to view this website correctly.{' '}
+              <a id="btnUpdateBrowser" href="https://bestvpn.org/outdatedbrowser/">
+                {' '}
+                Learn More{' '}
+              </a>
+            </p>
+            <p class="last">
+              <a href="#" id="btnCloseUpdateBrowser" title="Close">
+                &times;
+              </a>
+            </p>
+          </div>
+
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"
+            integrity="sha256-yV0saZESxHBqfSfNncH044y3GHbsxLZJbQQmuxrXv90="
+            crossorigin="anonymous"
+          ></script>
+
+          <script>
+            {
+              // Plain Javascript
+              //event listener: DOM ready
+              (addLoadEvent = func => {
+                const oldonload = window.onload;
+                if (typeof window.onload != 'function') {
+                  window.onload = func;
+                } else {
+                  window.onload = function () {
+                    if (oldonload) {
+                      oldonload();
+                    }
+                    func();
+                  };
+                }
+              })
+            }
+            {//call plugin function after DOM ready
+            addLoadEvent(() => {
+              if (typeof outdatedBrowser !== 'function') {
+                return;
+              }
+              outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit',
+                languagePath: '',
+              });
+            })}
+          </script>
           <Main />
           <NextScript />
         </body>
