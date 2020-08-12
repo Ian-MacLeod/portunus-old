@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"
             integrity="sha256-KNfTksp/+PcmJJ0owdo8yBLi/SVMQrH/PNPm25nR/pI="
-            crossorigin="anonymous"
+            crossOrigin="anonymous"
           />
         </Head>
         <body>
@@ -25,52 +25,24 @@ export default class MyDocument extends Document {
                 Learn More{' '}
               </a>
             </p>
-            <p class="last">
+            <p className="last">
+              {/* Ignoring this rule so that our markup will match what is expected by outdatedbrowser.css */}
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" id="btnCloseUpdateBrowser" title="Close">
                 &times;
               </a>
             </p>
           </div>
 
+          <Main />
+          <NextScript />
+
           <script
             src="https://cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"
             integrity="sha256-yV0saZESxHBqfSfNncH044y3GHbsxLZJbQQmuxrXv90="
-            crossorigin="anonymous"
-          ></script>
-
-          <script>
-            {
-              // Plain Javascript
-              //event listener: DOM ready
-              (addLoadEvent = func => {
-                const oldonload = window.onload;
-                if (typeof window.onload != 'function') {
-                  window.onload = func;
-                } else {
-                  window.onload = function () {
-                    if (oldonload) {
-                      oldonload();
-                    }
-                    func();
-                  };
-                }
-              })
-            }
-            {//call plugin function after DOM ready
-            addLoadEvent(() => {
-              if (typeof outdatedBrowser !== 'function') {
-                return;
-              }
-              outdatedBrowser({
-                bgColor: '#f25648',
-                color: '#ffffff',
-                lowerThan: 'object-fit',
-                languagePath: '',
-              });
-            })}
-          </script>
-          <Main />
-          <NextScript />
+            crossOrigin="anonymous"
+          />
+          <script src="/browserCompatibility.js" />
         </body>
       </html>
     );
