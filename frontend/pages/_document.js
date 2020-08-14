@@ -17,21 +17,22 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <div id="outdated">
-            <h6>Your browser is out-of-date!</h6>
-            <p>
-              Update your browser to view this website correctly.{' '}
-              <a id="btnUpdateBrowser" href="https://bestvpn.org/outdatedbrowser/">
-                {' '}
-                Learn More{' '}
-              </a>
-            </p>
-            <p className="last">
-              {/* Ignoring this rule so that our markup will match what is expected by outdatedbrowser.css */}
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a href="#" id="btnCloseUpdateBrowser" title="Close">
-                &times;
-              </a>
-            </p>
+            <div
+              style={{
+                'background-color': '#5f249f',
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+              }}
+            >
+              <h6>Your browser is not supported</h6>
+              <p>
+                It looks like you may be using a web browser that we don't support. Please try using
+                another browser and make sure it is the most recent version.
+              </p>
+            </div>
           </div>
 
           <Main />
